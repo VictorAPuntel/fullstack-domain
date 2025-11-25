@@ -1,0 +1,186 @@
+<!-- 
+ex018 - Country Search
+Goal: Fetch and display country data based on user input
+
+Input:
+  - Country name typed into the input
+  - Click on "Search" button
+
+Process:
+  1) Get the typed country name
+  2) If empty, show a warning and stop
+  3) Show "Loading..." message
+  4) Fetch data from RestCountries API
+     https://restcountries.com/v3.1/name/{name}
+  5) If not found (404), show "Country not found"
+  6) If OK, display:
+      - flag
+      - official name
+      - region
+      - capital
+      - population
+  7) Handle errors with a friendly message
+
+Output:
+  - A card showing country info or an error message
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ex018 - Country Search</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #020617;
+        color: #e2e8f0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .card {
+        background: #020617;
+        border-radius: 16px;
+        padding: 24px;
+        width: 420px;
+        max-width: 100%;
+        border: 1px solid #1e293b;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.85);
+      }
+
+      h1 {
+        font-size: 20px;
+        margin-bottom: 4px;
+        color: #38bdf8;
+      }
+
+      .subtitle {
+        font-size: 13px;
+        color: #9ca3af;
+        margin-bottom: 16px;
+      }
+
+      .form {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      input {
+        flex: 1;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid #374151;
+        background: #020617;
+        color: #e5e7eb;
+      }
+
+      input::placeholder {
+        color: #6b7280;
+      }
+
+      button {
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        background: #38bdf8;
+        color: #020617;
+        transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.2s;
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      button:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
+      }
+
+      .message {
+        font-size: 14px;
+        color: #9ca3af;
+      }
+
+      .message.error {
+        color: #fca5a5;
+      }
+
+      .country-card {
+        display: flex;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .flag {
+        width: 80px;
+        height: 54px;
+        border-radius: 8px;
+        border: 1px solid #1f2937;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .country-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .country-name {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .country-region {
+        font-size: 13px;
+        color: #9ca3af;
+      }
+
+      .country-meta {
+        font-size: 13px;
+      }
+
+      .country-meta span {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="card">
+      <h1>Country Search</h1>
+      <p class="subtitle">Type a country name and see its basic info.</p>
+
+      <section class="form">
+        <input
+          type="text"
+          id="country-input"
+          placeholder="e.g. Brazil"
+          autocomplete="off"
+        />
+        <button id="search-btn">Search</button>
+      </section>
+
+      <section id="result">
+        <p class="message">Waiting for a country name...</p>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
