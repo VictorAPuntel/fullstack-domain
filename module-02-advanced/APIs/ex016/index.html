@@ -1,0 +1,111 @@
+<!-- 
+ex016 - Todos List
+Goal: Fetch and display a list of todos
+
+Input:
+  - Click the "Load Todos" button
+
+Process:
+  1) Show "Loading..."
+  2) Fetch todos from JSONPlaceholder
+  3) Limit results (10)
+  4) Create <li> for each todo
+  5) Mark completed ones visually
+  6) Handle errors
+
+Output:
+  - A styled list of todos (completed / pending)
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ex016 - Todos List</title>
+
+    <style>
+      body {
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: system-ui, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .card {
+        background: #1e293b;
+        padding: 24px;
+        width: 420px;
+        border-radius: 12px;
+      }
+
+      h1 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .actions {
+        margin-bottom: 16px;
+      }
+
+      button {
+        background: #3b82f6;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 0;
+      }
+
+      .todo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #0f172a;
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+      }
+
+      .done {
+        background: #22c55e;
+      }
+
+      .pending {
+        background: #f97316;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="card">
+      <h1>Todos List</h1>
+
+      <div class="actions">
+        <button id="btn">Load Todos</button>
+      </div>
+
+      <ul id="list">
+        <li>Click the button to load todos</li>
+      </ul>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
