@@ -1,0 +1,64 @@
+<!-- 
+ex017 - Random Dog Viewer
+Goal: Fetch and display a random dog image
+
+Input:
+  - Click on "Load Dog"
+
+Process:
+  1) Show loading state
+  2) Fetch random dog image
+  3) Display image
+  4) Handle errors
+
+Output:
+  - A dog image 🐶
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ex017 - Random Dog</title>
+
+    <style>
+      body {
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: system-ui, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      button {
+        background: #3b82f6;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+      }
+
+      img {
+        width: 320px;
+        border-radius: 12px;
+        border: 2px solid #1e293b;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="btn">Load Dog</button>
+
+    <div id="area">
+      <p>Click the button to load a dog 🐶</p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
