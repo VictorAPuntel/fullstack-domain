@@ -1,0 +1,24 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.5rem;
+  margin: 30px;
+}
+
+.search-input {
+  font-size: 2rem;
+  padding: 15px 20px 15px 40px;
+  background-image: url('../assets/img/searchicon.png');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  outline: none;
+  width: 100px;
+  transition: all 0.4s ease;
+  &:focus {
+    width: 300px;
+  }
+}
