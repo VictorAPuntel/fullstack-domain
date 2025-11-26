@@ -1,0 +1,134 @@
+<!-- 
+ex020 - TV Show Search
+Goal:
+  Search for TV shows by name using an API and list the results.
+
+Input:
+  - Text typed into the search input
+  - Click on "Search" button
+
+Process:
+  1) Get the search term
+  2) If empty, show a warning
+  3) Show "Loading..." in the results area
+  4) Fetch data from TVMaze API:
+     https://api.tvmaze.com/search/shows?q={query}
+  5) For each result, display:
+      - show name
+      - premiered year (if available)
+      - type
+  6) Handle errors and show a friendly message
+
+Output:
+  - A list of shows matching the typed name
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ex020 - TV Show Search</title>
+
+    <style>
+      body {
+        background: #020617;
+        color: #e2e8f0;
+        font-family: system-ui, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .card {
+        background: #0f172a;
+        border-radius: 14px;
+        padding: 24px;
+        width: 460px;
+        border: 1px solid #1e293b;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.85);
+      }
+
+      h1 {
+        font-size: 20px;
+        margin-bottom: 8px;
+        color: #38bdf8;
+      }
+
+      .subtitle {
+        font-size: 13px;
+        color: #9ca3af;
+        margin-bottom: 16px;
+      }
+
+      .form {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      input {
+        flex: 1;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid #475569;
+        background: #020617;
+        color: #e2e8f0;
+      }
+
+      button {
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        background: #38bdf8;
+        color: #020617;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 14px;
+      }
+
+      .show-item {
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: #020617;
+        border: 1px solid #1e293b;
+      }
+
+      .show-title {
+        font-weight: 600;
+      }
+
+      .show-meta {
+        font-size: 12px;
+        color: #9ca3af;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="card">
+      <h1>TV Show Search</h1>
+      <p class="subtitle">Type a show name and see some results.</p>
+
+      <section class="form">
+        <input id="search-input" type="text" placeholder="e.g. friends" />
+        <button id="search-btn">Search</button>
+      </section>
+
+      <section id="results">
+        <p>Type something and click Search.</p>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
