@@ -1,0 +1,100 @@
+<!-- 
+ex019 - Chuck Norris Jokes by Category
+Goal:
+  Fetch categories, populate a dropdown, and fetch a random joke from the selected category.
+
+Input:
+  - User selects a category from the dropdown
+  - Click on "Get Joke"
+
+Process:
+  1) Fetch categories on page load
+  2) Populate the <select> with options
+  3) On button click:
+      - Get selected category
+      - Show "Loading..."
+      - Fetch joke from API
+      - Display joke text
+      - Handle errors
+Output:
+  - A card showing a random joke for the chosen category
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ex019 - Chuck Norris Jokes</title>
+
+    <style>
+      body {
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: system-ui, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .card {
+        background: #1e293b;
+        padding: 24px;
+        width: 420px;
+        border-radius: 12px;
+      }
+
+      h1 {
+        font-size: 20px;
+        margin-bottom: 12px;
+        color: #38bdf8;
+      }
+
+      select,
+      button {
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+      }
+
+      select {
+        width: 100%;
+        background: #0f172a;
+        color: #e2e8f0;
+        border: 1px solid #334155;
+        margin-bottom: 12px;
+      }
+
+      button {
+        width: 100%;
+        background: #38bdf8;
+        color: #0f172a;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .joke {
+        margin-top: 16px;
+        font-size: 16px;
+        line-height: 1.4;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="card">
+      <h1>Chuck Norris Jokes</h1>
+
+      <select id="category-select">
+        <option>Loading categories...</option>
+      </select>
+
+      <button id="btn">Get Joke</button>
+
+      <p class="joke" id="joke">Choose a category above.</p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
