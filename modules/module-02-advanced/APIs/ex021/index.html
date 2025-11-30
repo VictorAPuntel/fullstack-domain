@@ -1,0 +1,194 @@
+<!-- 
+ex021 - TV Shows Search (TVMaze API)
+Goal:
+  Search for TV shows by name and list the results
+
+Input:
+  - Text typed in the search input
+  - Click on "Search" button
+
+Process:
+  1) Get input, button and results container
+  2) On click:
+      - Get the typed text (trim)
+      - If empty, show "Please type a show name." and STOP
+      - Show "Loading..." and disable the button
+      - Build URL: API_BASE_URL + encodeURIComponent(query)
+      - fetch(url)
+        - Check response.ok
+        - Parse JSON
+        - If no results, show "No shows found."
+        - Else, create a card for each show:
+            * Image (if exists)
+            * Name
+            * Rating (if exists)
+            * Summary (short)
+      - Handle errors (show error message)
+      - In the end, re-enable the button and reset text
+
+Output:
+  - A list of show cards based on the search
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ex021 - TV Shows Search</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 40px 16px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 800px;
+        background: #020617;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+
+      p.subtitle {
+        font-size: 14px;
+        color: #9ca3af;
+        margin-bottom: 20px;
+      }
+
+      .search-area {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      #search-input {
+        flex: 1;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+      }
+
+      #search-btn {
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        background: #22c55e;
+        color: #022c22;
+        transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.2s ease;
+      }
+
+      #search-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        filter: grayscale(0.3);
+      }
+
+      #search-btn:not(:disabled):hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(34, 197, 94, 0.4);
+      }
+
+      #results {
+        margin-top: 10px;
+        min-height: 40px;
+      }
+
+      .message {
+        font-size: 14px;
+        color: #e5e7eb;
+      }
+
+      .message.error {
+        color: #fca5a5;
+      }
+
+      .shows-grid {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .show-card {
+        background: #020617;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #1f2937;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .show-card img {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .show-content {
+        padding: 10px 12px 12px;
+      }
+
+      .show-title {
+        font-weight: 600;
+        margin-bottom: 4px;
+        font-size: 15px;
+      }
+
+      .show-meta {
+        font-size: 12px;
+        color: #9ca3af;
+        margin-bottom: 6px;
+      }
+
+      .show-summary {
+        font-size: 13px;
+        color: #e5e7eb;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>TV Shows Search</h1>
+      <p class="subtitle">
+        Type a show name and click search. Data from
+        <strong>TVMaze API</strong>.
+      </p>
+
+      <div class="search-area">
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Example: friends, breaking bad, vikings..."
+        />
+        <button id="search-btn">Search</button>
+      </div>
+
+      <div id="results"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
