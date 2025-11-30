@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  text-decoration: none;
+}
+.wrapper {
+  padding: 120px 80px;
+}
+.detach {
+  font-weight: 700;
+  font-style: italic;
+}
+h3 {
+  font-size: 36px;
+  color: #3c184e;
+  text-align: center;
+  margin: 0 0 45px;
+}
+
+.top-banner {
+  background-image: url('assets/img/banner-topo.jpg');
+  background-position: center;
+  background-size: cover;
+}
+.name-logo-container {
+  max-width: 250px;
+  color: #3c184e;
+}
+.name-logo-container img {
+  width: 30px;
+  margin-right: 5px;
+}
+.name-logo-container .nome-pet-shop {
+  font-size: 35px;
+  margin: 0 0 5px 0;
+}
+.name-logo-container .slogan-pet-shop {
+  font-size: 14px;
+  text-align: center;
+  margin: 0;
+}
+.title-top-container {
+  max-width: 1024px;
+  border-radius: 10px;
+  padding: 40px;
+  margin: 70px auto 0;
+  background: #ffffffc4;
+  box-shadow: 0 8px 32px #1f26875e;
+}
+.top-title {
+  font-size: 60px;
+  color: #3c184e;
+  text-align: center;
+  font-weight: 800;
+  margin: 0 0 40px;
+}
+.contact-us-link {
+  text-align: center;
+  width: 200px;
+  padding: 10px 25px;
+  font-size: 20px;
+  background-color: #3c184e;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+.contact-us-link a {
+  color: #ffff;
+}
+.title-top-container img {
+  width: 20px;
+}
+.services-box {
+  max-width: 800px;
+  color: #3c184e;
+  margin: 0 auto 50px;
+}
+.services-box li {
+  font-size: 20px;
+  margin: 0 0 20px;
+}
+.services-box-img {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.services-box-img img {
+  box-shadow: 3px 6px 10px 6px #0000005c;
+  border-radius: 5px;
+}
+.band {
+  background-color: #3c184e;
+  text-align: center;
+}
+.text-band {
+  max-width: 800px;
+  margin: 0 auto 50px;
+  color: #fff;
+  font-size: 40px;
+}
+.social-mredia a {
+  margin: 0 20px;
+}
+.social-mredia img {
+  width: 50px;
+  height: 50px;
+}
+.top-brands {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.brand-logo {
+  width: 148px;
+  height: 148px;
+  margin: 0 15px;
+}
+.where-are-we {
+  text-align: center;
+}
+.where-are-we p {
+  color: #3c184e;
+  font-size: 20px;
+  margin: 0 0 45px;
+}
+.where-are-we iframe {
+  width: 800px;
+  height: 450px;
+}
+footer {
+  background-color: #3c184e;
+  padding: 10px 0;
+}
+.text-footer {
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+}
