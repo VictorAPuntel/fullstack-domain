@@ -1,0 +1,154 @@
+<!-- 
+ex022 - Users Directory (JSONPlaceholder API)
+Goal:
+  Load a list of users from an API and display them as cards
+
+Input:
+  - Click on "Load Users" button
+
+Process:
+  1) Get button and users container
+  2) On click:
+      - Show "Loading..."
+      - Disable button + change text
+      - fetch(API_URL)
+          - Check response.ok
+          - Parse JSON
+          - Clear container
+          - For each user, create a card:
+              * Name
+              * Username
+              * Email
+              * City
+              * Website
+      - Handle errors
+      - Re-enable button in the end
+
+Output:
+  - A list/grid of user cards on the page
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ex022 - Users Directory</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: system-ui, sans-serif;
+        min-height: 100vh;
+        padding: 40px 16px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 900px;
+        background: #1e293b;
+        padding: 24px;
+        border-radius: 12px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+
+      p.subtitle {
+        font-size: 14px;
+        color: #94a3b8;
+        margin-bottom: 20px;
+      }
+
+      #load-btn {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #38bdf8;
+        color: #0c4a6e;
+        font-weight: 600;
+        transition: 0.2s ease;
+        margin-bottom: 20px;
+      }
+
+      #load-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      #load-btn:not(:disabled):hover {
+        filter: brightness(1.1);
+        transform: translateY(-1px);
+      }
+
+      #users-container {
+        min-height: 40px;
+      }
+
+      .message {
+        font-size: 15px;
+      }
+
+      .message.error {
+        color: #fca5a5;
+      }
+
+      .users-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 16px;
+        margin-top: 10px;
+      }
+
+      .user-card {
+        background: #0f172a;
+        border-radius: 10px;
+        border: 1px solid #334155;
+        padding: 14px;
+      }
+
+      .user-name {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .user-username {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 8px;
+      }
+
+      .user-info {
+        font-size: 14px;
+        line-height: 1.4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Users Directory</h1>
+      <p class="subtitle">
+        Click the button to load users from the
+        <strong>JSONPlaceholder API</strong>.
+      </p>
+
+      <button id="load-btn">Load Users</button>
+
+      <div id="users-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
