@@ -1,0 +1,192 @@
+<!-- 
+ex023 - Pokémon Finder (PokéAPI)
+Goal:
+  Search for a Pokémon by name and display its basic info
+
+Input:
+  - Text typed in the search input
+  - Click on "Search" button
+
+Process:
+  1) Get input, button and result container
+  2) On click:
+      - Get typed name (trim + toLowerCase)
+      - If empty -> show a message and return
+      - Show "Loading..." in result area
+      - Disable button + change text
+      - Build URL with encodeURIComponent
+      - fetch(URL)
+          - If response.status === 404 -> show "Pokémon not found"
+          - If !response.ok -> throw Error
+          - Parse JSON
+          - Clear result container
+          - Create and append a Pokémon card:
+              * Name + ID
+              * Image
+              * Types
+              * Weight and height
+      - Handle errors (show a friendly message)
+      - Re-enable button in the end (finally)
+
+Output:
+  - A Pokémon card rendered on the page (or an error message)
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ex023 - Pokémon Finder</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: system-ui, sans-serif;
+        min-height: 100vh;
+        padding: 40px 16px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+        background: #1e293b;
+        padding: 24px;
+        border-radius: 12px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+
+      p.subtitle {
+        font-size: 14px;
+        color: #94a3b8;
+        margin-bottom: 20px;
+      }
+
+      .search-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      #search-input {
+        flex: 1;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid #334155;
+        background: #020617;
+        color: #e2e8f0;
+        font-size: 14px;
+      }
+
+      #search-input::placeholder {
+        color: #64748b;
+      }
+
+      #search-btn {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #22c55e;
+        color: #052e16;
+        font-weight: 600;
+        transition: 0.2s ease;
+        white-space: nowrap;
+      }
+
+      #search-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      #search-btn:not(:disabled):hover {
+        filter: brightness(1.1);
+        transform: translateY(-1px);
+      }
+
+      #result-container {
+        min-height: 40px;
+      }
+
+      .message {
+        font-size: 15px;
+      }
+
+      .message.error {
+        color: #fca5a5;
+      }
+
+      .pokemon-card {
+        margin-top: 10px;
+        background: #020617;
+        border-radius: 12px;
+        border: 1px solid #334155;
+        padding: 16px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+
+      .pokemon-card img {
+        width: 120px;
+        height: 120px;
+        image-rendering: pixelated;
+      }
+
+      .pokemon-main {
+        flex: 1;
+      }
+
+      .pokemon-name {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      .pokemon-types {
+        font-size: 14px;
+        color: #a5b4fc;
+        margin-bottom: 8px;
+      }
+
+      .pokemon-stats {
+        font-size: 14px;
+        color: #cbd5f5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Pokémon Finder</h1>
+      <p class="subtitle">
+        Type a Pokémon name (like <strong>pikachu</strong> or
+        <strong>charizard</strong>) and click search.
+      </p>
+
+      <div class="search-row">
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Type a Pokémon name..."
+        />
+        <button id="search-btn">Search</button>
+      </div>
+
+      <div id="result-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
