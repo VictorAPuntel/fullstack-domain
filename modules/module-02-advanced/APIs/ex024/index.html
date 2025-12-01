@@ -1,0 +1,176 @@
+<!-- 
+ex024 - Star Wars Characters Browser (SWAPI)
+Goal:
+  Search Star Wars characters and list them in cards
+
+Input:
+  - Optional name typed in the search input
+  - Click on "Search Characters"
+
+Process:
+  1) Get input, button and result container
+  2) If input empty: fetch https://swapi.dev/api/people
+     else fetch https://swapi.dev/api/people?search={query}
+  3) Show "Loading..."
+  4) Disable button
+  5) fetch() -> response.ok -> response.json()
+  6) If results empty -> show message
+  7) Render character cards:
+       * Name
+       * Height
+       * Gender
+       * Birth year
+       * Homeworld (URL requires extra fetch - optional challenge)
+  8) Handle errors
+  9) Finally enable button
+
+Output:
+  - Grid of cards with characters info
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ex024 - SWAPI Characters</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: system-ui, sans-serif;
+        min-height: 100vh;
+        padding: 40px 16px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 900px;
+        background: #1e293b;
+        padding: 24px;
+        border-radius: 12px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+        color: #94a3b8;
+        margin-bottom: 20px;
+      }
+
+      .search-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      #search-input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #334155;
+        background: #020617;
+        color: #e2e8f0;
+        font-size: 14px;
+      }
+
+      #search-btn {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #38bdf8;
+        color: #0c4a6e;
+        font-weight: 600;
+        transition: 0.2s ease;
+        white-space: nowrap;
+      }
+
+      #search-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      #results {
+        min-height: 40px;
+      }
+
+      .characters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 16px;
+        margin-top: 14px;
+      }
+
+      .char-card {
+        background: #0f172a;
+        padding: 14px;
+        border-radius: 10px;
+        border: 1px solid #334155;
+      }
+
+      .char-name {
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      .char-info {
+        font-size: 14px;
+        color: #cbd5e1;
+        line-height: 1.4;
+      }
+
+      .message {
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+
+      .error {
+        color: #fca5a5;
+      }
+
+      span {
+        display: block;
+      }
+
+      a {
+        color: #cbd5e1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Star Wars Characters</h1>
+      <p class="subtitle">
+        Search by name or leave empty to load the first list.
+      </p>
+
+      <div class="search-row">
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search a character..."
+        />
+        <button id="search-btn">Search Characters</button>
+      </div>
+
+      <div id="results"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
