@@ -45,6 +45,35 @@ function setLoadingState(isLoading) {
 //           * Show homeworld (URL only, or fetch planet for extra challenge)
 //     - Append grid to results
 // }
+
+function fetchWorld(url) {
+  return fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Homeworld request failed')
+      }
+      return response.json()
+    })
+    .catch((error) => {
+      console.log(error)
+      return null
+    })
+}
+
+function fetchFilm(url) {
+  return fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Films request failed')
+      }
+      return response.json()
+    })
+    .catch((error) => {
+      console.log(error)
+      return null
+    })
+}
+
 function renderCharacters(list) {
   results.innerHTML = ''
 
@@ -80,25 +109,40 @@ function renderCharacters(list) {
     const spanHome = document.createElement('span')
     spanHome.textContent = 'Homeworld: Loading...'
 
-    fetch(char.homeworld)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Homeworld request failed')
-        }
-        return response.json()
-      })
-      .then((planetData) => {
-        spanHome.textContent = `Homeworld: ${planetData.name}`
-      })
-      .catch((error) => {
-        console.log(error)
+    fetchWorld(char.homeworld).then((planet) => {
+      if (planet) {
+        spanHome.textContent = `Homeworld: ${planet.name}`
+      } else {
         spanHome.textContent = 'Homeworld: Unknown'
+      }
+    })
+
+    const filmsGrid = document.createElement('div')
+    filmsGrid.classList.add('films')
+
+    const filmsTitle = document.createElement('h3')
+    filmsTitle.textContent = 'Films'
+    filmsGrid.appendChild(filmsTitle)
+
+    const filmsList = document.createElement('ul')
+    filmsGrid.appendChild(filmsList)
+
+    const filmPromises = char.films.map((filmUrl) => fetchFilm(filmUrl))
+
+    Promise.all(filmPromises).then((films) => {
+      films.forEach((film) => {
+        if (!film) return
+
+        const li = document.createElement('li')
+        li.textContent = film.title
+        filmsList.appendChild(li)
       })
+    })
 
     const charInfo = document.createElement('p')
     charInfo.classList.add('char-info')
 
-    charInfo.append(spanHeight, spanGender, spanBD, spanHome)
+    charInfo.append(spanHeight, spanGender, spanBD, spanHome, filmsGrid)
     card.append(name, charInfo)
     grid.appendChild(card)
   })
