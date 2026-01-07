@@ -4,9 +4,14 @@ function setTheme(theme) {
 }
 
 function updateTheme() {
-  let theme = localStorage.getItem('theme')
+  let theme = localStorage.getItem('theme') || 'dark'
   document.querySelector('#theme').innerHTML = `Theme ${theme}`
-  document.querySelector('body').classList.toggle('light')
+
+  if (theme === 'light') {
+    body.classList.add('light')
+  } else {
+    body.classList.remove('light')
+  }
 }
 
 updateTheme()
